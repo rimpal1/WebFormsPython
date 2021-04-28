@@ -102,20 +102,40 @@ def api_retrieve(id) -> str:
     return resp
 
 
-@app.route('/api/v1/patients/', methods=['POST'])
+@app.route('/api/v1/patients', methods=['POST'])
 def api_add() -> str:
+    content = request.json
+
+    cursor = mysql.get_db().cursor()
+    inputData = (content['PatientName'], content['PatientSex'], content['Age'],
+                 content['Height'], content['Weight'])
+    sql_insert_query = """INSERT INTO bioData (PatientName, PatientSex, Age, Height, Weight) VALUES (%s, %s,%s, %s,%s) """
+    cursor.execute(sql_insert_query, inputData)
+    mysql.get_db().commit()
     resp = Response(status=201, mimetype='application/json')
     return resp
 
 
 @app.route('/api/v1/patients/<int:id>', methods=['PUT'])
 def api_edit(id) -> str:
-    resp = Response(status=201, mimetype='application/json')
+    cursor = mysql.get_db().cursor()
+    content = request.json
+    inputData = (content['PatientName'], content['PatientSex'], content['Age'],
+                 content['Height'], content['Weight'], id)
+    sql_update_query = """UPDATE bioData t SET t.PatientName = %s, t.PatientSex = %s, t.Age = %s, t.Height =
+    %s, t.Weight = %s WHERE id = %s """
+    cursor.execute(sql_update_query, inputData)
+    mysql.get_db().commit()
+    resp = Response(status=200, mimetype='application/json')
     return resp
 
 
-@app.route('/api/patients/<int:id>', methods=['DELETE'])
+@app.route('/api/v1/patients/<int:id>', methods=['DELETE'])
 def api_delete(id) -> str:
+    cursor = mysql.get_db().cursor()
+    sql_delete_query = """DELETE FROM bioData WHERE id = %s """
+    cursor.execute(sql_delete_query, id)
+    mysql.get_db().commit()
     resp = Response(status=210, mimetype='application/json')
     return resp
 
