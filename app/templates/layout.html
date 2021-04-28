@@ -17,19 +17,19 @@
     <title>Welcome to my webpage!</title>
     {% endif %}
     <head>
-<script>
-    function onDelete() {
-      alert("The selected city has been deleted!")
-    }
+        <script>
+            function onDelete() {
+                alert("The selected patient has been deleted!")
+            }
 
-    function onAdd() {
-      alert("The city has been Added!")
-    }
+            function onAdd() {
+                alert("The patient has been Added!")
+            }
 
-     function onUpdate() {
-      alert("The city has been Updated!")
-    }
-</script>
+            function onUpdate() {
+                alert("The patient has been Updated!")
+            }
+        </script>
 
 <body>
 <!-- As a heading -->
@@ -49,11 +49,11 @@
                 <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="/api/v1/cities">Cities API JSON endpoint <span
+                <a class="nav-link" href="/api/v1/patients">Patients API JSON endpoint <span
                         class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="btn btn-success pl-2 lr-2 ml-3" href="/cities/new">Add City<span class="sr-only">(current)</span></a>
+                <a class="btn btn-success pl-2 lr-2 ml-3" href="/patients/new">Add New Patient<span class="sr-only">(current)</span></a>
             </li>
         </ul>
     </div>
